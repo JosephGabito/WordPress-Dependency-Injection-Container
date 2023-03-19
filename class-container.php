@@ -141,29 +141,73 @@ class Container {
 			return new $class_name();
 		}
 
-		$callback = function( $param ) use ( $class_name ) {
-
-			$type = $param->getType();
-
-			if ( ! $type ) {
-				throw new \Exception( 'Cannot resolve constructor dependencies from ' . $class_name, 500 );
-			}
-
-			if ( class_exists( '\ReflectionUnionType' ) && $type instanceof \ReflectionUnionType ) {
-				throw new \Exception( 'Cannot resolve constructor dependencies of union types from ' . $class_name, 500 );
-			}
-
-			if ( $type instanceof \ReflectionNamedType && ! $type->isBuiltin() ) {
-				return $this->get( $type->getName() );
-			}
-
-			throw new \Exception( 'Cannot resolve dependencies. Unknown error has occured.', 500 );
-
-		};
-
-		$dependencies = array_map( $callback, $parameters );
+		$dependencies = array_map( array( $this, $this->get_resolver() ), $parameters );
 
 		return $reflection_class->newInstanceArgs( $dependencies );
+
+	}
+
+	/**
+	 * Retrieves the resolver based on the version of the PHP installed.
+	 *
+	 * @return string The resolver method.
+	 */
+	protected function get_resolver() {
+
+		if ( version_compare( PHP_VERSION, '7.0.0', '>=' ) ) {
+			return 'php_7_resolver';
+		}
+
+		return 'php_5_resolver';
+
+	}
+
+
+	/**
+	 * PHP 5 resolver.
+	 *
+	 * @param object $param The parameters, as a ReflectionParameter objects.
+	 *
+	 * @throws \Exception When an error has occured.
+
+	 * @return mixed The instance of the class from the entries.
+	 */
+	protected function php_5_resolver( $param ) {
+
+		if ( empty( $param->getClass() ) ) {
+			throw new \Exception( 'Cannot resolve constructor parameter with no type hint $' . $param->getName(), 500 );
+		}
+
+		return $this->get( $param->getClass()->getName() );
+
+	}
+
+	/**
+	 * PHP 7 resolver.
+	 *
+	 * @param object $param — The parameters, as a ReflectionParameter objects.
+	 * 
+	 * @throws \Exception - When an error has occured.
+	 * 
+	 * @return mixed The instance of the class from the entries.
+	 */
+	protected function php_7_resolver( $param ) {
+
+		$type = $param->getType();
+
+		if ( ! $type ) {
+			throw new \Exception( 'Cannot resolve constructor dependencies from ' . $param->getClass()->getName(), 500 );
+		}
+
+		if ( class_exists( '\ReflectionUnionType' ) && $type instanceof \ReflectionUnionType ) {
+			throw new \Exception( 'Cannot resolve constructor dependencies of union types from ' . $param->getClass()->getName(), 500 );
+		}
+
+		if ( $type instanceof \ReflectionNamedType && ! $type->isBuiltin() ) {
+			return $this->get( $type->getName() );
+		}
+
+		throw new \Exception( 'Cannot resolve dependencies. Unknown error has occured.', 500 );
 
 	}
 }
