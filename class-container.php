@@ -12,7 +12,7 @@
  * in your bootstrap file or whatever. Just remember to rename the
  * namespace to avoid conflicts or name collisions with other code.
  *
- * 👉 Inspired from various PSR-11 implementations and the @ProgramWithGio YouTube channel. 
+ * 👉 Inspired from various PSR-11 implementations and the @ProgramWithGio YouTube channel.
  *
  * @package DIC\WP
  */
@@ -41,6 +41,12 @@ final class Container {
 	 * @return mixed The specific instance of the class found from the entries.
 	 */
 	public function get( $class_name = '' ) {
+
+		$cache_entries = wp_cache_get( self::class, self::class . '_group' );
+
+		if ( ! empty( $cache_entries[ $class_name ] ) ) {
+			return $cache_entries[ $class_name ]( $this );
+		}
 
 		if ( $this->has( $class_name ) ) {
 			return $this->entries[ $class_name ]( $this );
@@ -84,6 +90,8 @@ final class Container {
 		}
 
 		$this->entries[ $class_name ] = $func;
+
+		wp_cache_set( self::class, $this->entries, self::class . '_group' );
 
 		return $this;
 
