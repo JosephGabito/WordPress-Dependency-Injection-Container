@@ -24,7 +24,7 @@ namespace DIC\WP;
  *
  * @version 0.0.1
  */
-final class Container {
+class Container {
 
 	/**
 	 * The fully qualified class names entries.
