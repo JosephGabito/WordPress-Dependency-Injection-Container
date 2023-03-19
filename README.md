@@ -130,3 +130,4 @@ All PRs are welcome!
 ## Additional Links:
 - [PHP-DI](https://php-di.org/)
 - [PHP Container Interface](https://www.php-fig.org/psr/psr-11/)
+- Special thanks to [@ProgramWithGio] (https://www.youtube.com/@ProgramWithGio)
