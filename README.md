@@ -7,11 +7,6 @@ This Container contains only one class than can easily be copied, modified, and 
 
 Supports PHP 5.6 or above and Autowiring.
 
-Credits:
-- [PHP-DI](https://php-di.org/)
-- [PHP Container Interface](https://www.php-fig.org/psr/psr-11/)
-- [@ProgramWithGio](https://www.youtube.com/@ProgramWithGio)
-
 ## Installation
 - Rename the class by modifying the namespace and/or the class name.
 - Use it! See usage below.
@@ -131,3 +126,7 @@ This class is a simple implementation that doesn't include all the features avai
 
 ## Contributing
 All PRs are welcome!
+
+## Additional Links:
+- [PHP-DI](https://php-di.org/)
+- [PHP Container Interface](https://www.php-fig.org/psr/psr-11/)
