@@ -12,7 +12,7 @@
  * in your bootstrap file or whatever. Just remember to rename the
  * namespace to avoid conflicts or name collisions with other code.
  *
- * 👉 Inspired from various PSR-11 implementations and the @ProgramWithGio YouTube channel.
+ * Inspired from various PSR-11 implementations.
  *
  * @package DIC\WP
  */
