@@ -16,10 +16,10 @@
  * and the @ProgramWithGio YouTube channel. I'm constantly looking for
  * ways to improve, so if you have any feedback or suggestions, I'm all ears!
  *
- * @package Joseph\WP
+ * @package DIC\WP
  */
 
-namespace Joseph\WP;
+namespace DIC\WP;
 
 /**
  * Feel free to modify this file especially the namespace above ☝☝☝ for your own needs.
