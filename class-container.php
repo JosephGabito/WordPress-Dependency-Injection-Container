@@ -2,8 +2,8 @@
 /**
  * The main Container class!
  *
- * This class is a basic implementation of a Container. It is inspired by PSR-
- * 11 Container Interface but with only the things stripped down with a bare
+ * This class is a basic implementation of a Container. It is inspired by PSR-11
+ * Container Interface but with only the things stripped down with a bare
  * minimum feature for maximum compatibility within the WordPress ecosystem!
  *
  * This Container is written as a stand-alone "dwtfyw" class for WordPress.
