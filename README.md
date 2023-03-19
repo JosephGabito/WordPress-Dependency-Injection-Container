@@ -13,6 +13,9 @@ Supports PHP 5.6 or above and Autowiring.
 ## Usage
 
 ```php
+// Your autoloader class. Otherwise, you'll have to manually load the files.
+require_once __DIR__ . '/vendor/autoload.php';
+
 // Require the Container class file.
 require_once __DIR__ . '/class-container.php';
 
