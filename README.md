@@ -46,7 +46,7 @@ class Foo {
         $this->zag = $zag;
     }
     public function foo_bar_zig_zag() {
-        return 'Foo Bar Zig Zig!';
+        return 'Foo Bar Zig Zag!';
     }
 }
 
@@ -57,17 +57,13 @@ class Bar {
     }
 }
 
-class Zig {
-    // ...
-}
+class Zig {} // ...
 
-class Zag {
-    // ...
-}
+class Zag {} // ...
 
 $foo = new Foo( new Bar( new Zig() ), new Zag() );
 
-// Prints 'Foo Bar Zig Zig!'.
+// Prints 'Foo Bar Zig Zag!'.
 echo $foo->foo_bar_zig_zag();
 ```
 
@@ -77,7 +73,7 @@ With Container, we only need to:
 // Assuming, you're using autoloading (which is a must).
 $foo = $container->get(Foo::class);
 
-// Prints 'Foo Bar Zig Zig!'.
+// Prints 'Foo Bar Zig Zag!'.
 echo $foo->foo_bar_zig_zag();
 ```
 Behind the scenes it uses the concept called 'Autowiring' using ReflectionClass to resolve all of the dependencies.
